@@ -17,8 +17,13 @@ package com.example.android.miwok.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import com.example.android.miwok.R;
+import com.example.android.miwok.customsupport.CustomWordAdapter;
+import com.example.android.miwok.customsupport.CustomWord;
+
+import java.util.ArrayList;
 
 public class PhrasesActivity extends AppCompatActivity {
 
@@ -26,5 +31,14 @@ public class PhrasesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phrases);
+
+        ListView listView = (ListView) findViewById(R.id.list_phrases);
+
+        ArrayList<CustomWord> phrases = new ArrayList<>();
+        phrases.add(new CustomWord("THis is a phrase", "this is another phrase"));
+
+        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, R.layout.list_item_phrases, phrases);
+        listView.setAdapter(customWordAdapter);
+
     }
 }

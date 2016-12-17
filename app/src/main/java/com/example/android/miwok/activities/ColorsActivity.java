@@ -17,8 +17,13 @@ package com.example.android.miwok.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import com.example.android.miwok.R;
+import com.example.android.miwok.customsupport.CustomWordAdapter;
+import com.example.android.miwok.customsupport.CustomWord;
+
+import java.util.ArrayList;
 
 public class ColorsActivity extends AppCompatActivity {
 
@@ -26,5 +31,23 @@ public class ColorsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_colors);
+
+        ListView listView = (ListView) findViewById(R.id.list_colors);
+
+        ArrayList<CustomWord> colors = new ArrayList<>();
+        colors.add(new CustomWord("Weṭeṭṭi", "Red", R.drawable.color_red));
+        colors.add(new CustomWord("Chokokki", "Green", R.drawable.color_green));
+        colors.add(new CustomWord("Takaakki", "Brown", R.drawable.color_brown));
+        colors.add(new CustomWord("Topoppi", "Gray", R.drawable.color_gray));
+
+
+        colors.add(new CustomWord("Black", "black", R.drawable.color_black));
+
+        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, R.layout.list_item_w_imageasset, colors);
+
+        listView.setAdapter(customWordAdapter);
+
+
+
     }
 }

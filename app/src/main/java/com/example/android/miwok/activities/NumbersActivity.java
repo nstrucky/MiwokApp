@@ -23,8 +23,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.android.miwok.R;
-import com.example.android.miwok.customsupport.CustomNumbers;
-import com.example.android.miwok.customsupport.CustomNumbersAdapter;
+import com.example.android.miwok.customsupport.CustomWord;
+import com.example.android.miwok.customsupport.CustomWordAdapter;
 
 import java.util.ArrayList;
 
@@ -37,22 +37,22 @@ public class NumbersActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.list);
         // Create a list of words
-        ArrayList<CustomNumbers> numbers = new ArrayList<CustomNumbers>();
-        numbers.add(new CustomNumbers("Lutti", "One", R.drawable.number_one));
-        numbers.add(new CustomNumbers("Otiiko", "Two", R.drawable.number_two));
-        numbers.add(new CustomNumbers("Tolookosu", "Three", R.drawable.number_three));
-        numbers.add(new CustomNumbers("Oyyisa", "Four", R.drawable.number_four));
-        numbers.add(new CustomNumbers("Massokka", "Five", R.drawable.number_five));
-        numbers.add(new CustomNumbers("Temmokka", "Six", R.drawable.number_six));
-        numbers.add(new CustomNumbers("Kenekaku", "Seven", R.drawable.number_seven));
-        numbers.add(new CustomNumbers("Kawinta", "Eight", R.drawable.number_eight));
-        numbers.add(new CustomNumbers("Wo'e", "Nine", R.drawable.number_nine));
-        numbers.add(new CustomNumbers("Na'aacha", "Ten", R.drawable.number_ten));
+        ArrayList<CustomWord> numbers = new ArrayList<CustomWord>();
+        numbers.add(new CustomWord("Lutti", "One", R.drawable.number_one));
+        numbers.add(new CustomWord("Otiiko", "Two", R.drawable.number_two));
+        numbers.add(new CustomWord("Tolookosu", "Three", R.drawable.number_three));
+        numbers.add(new CustomWord("Oyyisa", "Four", R.drawable.number_four));
+        numbers.add(new CustomWord("Massokka", "Five", R.drawable.number_five));
+        numbers.add(new CustomWord("Temmokka", "Six", R.drawable.number_six));
+        numbers.add(new CustomWord("Kenekaku", "Seven", R.drawable.number_seven));
+        numbers.add(new CustomWord("Kawinta", "Eight", R.drawable.number_eight));
+        numbers.add(new CustomWord("Wo'e", "Nine", R.drawable.number_nine));
+        numbers.add(new CustomWord("Na'aacha", "Ten", R.drawable.number_ten));
 
 
-        CustomNumbersAdapter customNumbersAdapter = new CustomNumbersAdapter(this, R.layout.list_item_numbers, numbers);
+        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, R.layout.list_item_w_imageasset, numbers);
 
-        listView.setAdapter(customNumbersAdapter);
+        listView.setAdapter(customWordAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
