@@ -35,9 +35,9 @@ public class PhrasesActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list_phrases);
 
         ArrayList<CustomWord> phrases = new ArrayList<>();
-        phrases.add(new CustomWord("THis is a phrase", "this is another phrase"));
+        phrases.add(new CustomWord("This is a phrase", "this is another phrase"));
 
-        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, R.layout.list_item_phrases, phrases);
+        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, phrases);
         listView.setAdapter(customWordAdapter);
 
     }

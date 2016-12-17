@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-
+    android:id="@+id/linearlayout_parent"
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/imageView_numbers"
+        android:id="@+id/imageView_listItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -21,6 +21,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_weight="3"
+        android:id="@+id/linearlayout_textviews"
         android:orientation="vertical">
 
         <TextView

@@ -7,6 +7,7 @@ public class CustomWord {
     private final String mMiwokTranslation;
     private final String mEnglishTranslation;
     private int mImageResourceID;
+    private boolean mHasImageView;
 
     /**
      * Created by root on 12/14/16.
@@ -17,12 +18,14 @@ public class CustomWord {
     public CustomWord(String miwokTranslation, String englishTranslation) {
         mMiwokTranslation = miwokTranslation;
         mEnglishTranslation = englishTranslation;
+        mHasImageView = false;
 
     }
 
     public CustomWord(String miwokTranslation, String englishTranslation, int numberImageID) {
         this(miwokTranslation, englishTranslation);
         mImageResourceID = numberImageID;
+        mHasImageView = true;
     }
 
     public String getmMiwokTranslation() {
@@ -35,5 +38,9 @@ public class CustomWord {
 
     public int getImageResourceID() {
         return mImageResourceID;
+    }
+
+    public boolean hasImageView() {
+        return mHasImageView;
     }
 }

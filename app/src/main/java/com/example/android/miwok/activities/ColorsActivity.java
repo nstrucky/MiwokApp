@@ -43,7 +43,7 @@ public class ColorsActivity extends AppCompatActivity {
 
         colors.add(new CustomWord("Black", "black", R.drawable.color_black));
 
-        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, R.layout.list_item_w_imageasset, colors);
+        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, colors);
 
         listView.setAdapter(customWordAdapter);
 
