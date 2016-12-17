@@ -37,7 +37,8 @@ public class PhrasesActivity extends AppCompatActivity {
         ArrayList<CustomWord> phrases = new ArrayList<>();
         phrases.add(new CustomWord("This is a phrase", "this is another phrase"));
 
-        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, phrases);
+
+        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, phrases, R.color.category_phrases);
         listView.setAdapter(customWordAdapter);
 
     }

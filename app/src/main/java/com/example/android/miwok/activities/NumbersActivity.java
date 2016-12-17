@@ -50,7 +50,7 @@ public class NumbersActivity extends AppCompatActivity {
         numbers.add(new CustomWord("Na'aacha", "Ten", R.drawable.number_ten));
 
 
-        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, numbers);
+        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, numbers, R.color.category_numbers);
 
         listView.setAdapter(customWordAdapter);
 

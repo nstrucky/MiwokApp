@@ -37,7 +37,7 @@ public class FamilyActivity extends AppCompatActivity {
         ArrayList<CustomWord> family = new ArrayList<>();
         family.add(new CustomWord("әpә", "Father", R.drawable.family_father));
 
-        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, family);
+        CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, family, R.color.category_family);
 
         listView.setAdapter(customWordAdapter);
 

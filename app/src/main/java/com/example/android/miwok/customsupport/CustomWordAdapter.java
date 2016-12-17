@@ -2,6 +2,7 @@ package com.example.android.miwok.customsupport;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.android.miwok.R;
 import com.example.android.miwok.activities.ColorsActivity;
 import com.example.android.miwok.activities.FamilyActivity;
 import com.example.android.miwok.activities.NumbersActivity;
+import com.example.android.miwok.activities.PhrasesActivity;
 
 import java.util.List;
 
@@ -24,10 +26,12 @@ import java.util.List;
 
 public class CustomWordAdapter extends ArrayAdapter {
 
-    public CustomWordAdapter(Context context, List list) {
-        super(context, 0, list);
-    }
+    private int mColorResourceID;
 
+    public CustomWordAdapter(Context context, List list, int colorResourceID) {
+        super(context, 0, list);
+        mColorResourceID = colorResourceID;
+    }
 
     @NonNull
     @Override
@@ -42,14 +46,16 @@ public class CustomWordAdapter extends ArrayAdapter {
             }
 
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.imageView_listItem);
+        LinearLayout linearLayout = (LinearLayout) listItemView.findViewById(R.id.linearlayout_textviews);
+
+
+        int color = ContextCompat.getColor(getContext(), mColorResourceID);
+
+        linearLayout.setBackgroundColor(color);
 
         if (!currentWord.hasImageView()) {
             imageView.setImageResource(R.drawable.family_mother);
             imageView.setVisibility(ImageView.GONE);
-//            LinearLayout linearLayout = (LinearLayout) listItemView.findViewById(R.id.linearlayout_textviews);
-//            LinearLayout linearLayout1 = (LinearLayout) listItemView.findViewById(R.id.linearlayout_parent);
-//            ViewGroup.LayoutParams params = linearLayout.getLayoutParams();
-//            params.width = linearLayout1.getLayoutParams().width;
 
         } else {
             imageView.setVisibility(ImageView.VISIBLE);
@@ -61,7 +67,6 @@ public class CustomWordAdapter extends ArrayAdapter {
 
         textView1.setText(currentWord.getmMiwokTranslation());
         textView2.setText(currentWord.getEnglishTranslation());
-
 
 
         return listItemView;
