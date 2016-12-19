@@ -45,13 +45,11 @@ public class CustomWordAdapter extends ArrayAdapter {
                 listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
             }
 
-        ImageView imageView = (ImageView) listItemView.findViewById(R.id.imageView_listItem);
         LinearLayout linearLayout = (LinearLayout) listItemView.findViewById(R.id.linearlayout_textviews);
-
-
         int color = ContextCompat.getColor(getContext(), mColorResourceID);
-
         linearLayout.setBackgroundColor(color);
+
+        ImageView imageView = (ImageView) listItemView.findViewById(R.id.imageView_listItem);
 
         if (!currentWord.hasImageView()) {
             imageView.setImageResource(R.drawable.family_mother);
