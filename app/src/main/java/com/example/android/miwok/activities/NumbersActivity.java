@@ -18,6 +18,7 @@ package com.example.android.miwok.activities;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -58,8 +59,10 @@ public class NumbersActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int audioResource = numbers.get(position).getAudioResourceID();
-                MediaPlayer.create(getApplicationContext(), audioResource).start();
+                CustomWord customWord = numbers.get(position);
+                Log.v("NumbersActivity", "Current Word: " + customWord);
+//                int audioResource = numbers.get(position).getAudioResourceID();
+                MediaPlayer.create(getApplicationContext(), customWord.getAudioResourceID()).start();
             }
         });
     }
