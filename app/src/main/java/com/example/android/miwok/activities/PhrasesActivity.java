@@ -15,8 +15,11 @@
  */
 package com.example.android.miwok.activities;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.miwok.R;
@@ -34,12 +37,28 @@ public class PhrasesActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.list_phrases);
 
-        ArrayList<CustomWord> phrases = new ArrayList<>();
-        phrases.add(new CustomWord("This is a phrase", "this is another phrase"));
-
+        final ArrayList<CustomWord> phrases = new ArrayList<>();
+        phrases.add(new CustomWord("minto wuksus", "Where are you going?", R.raw.phrase_where_are_you_going));
+        phrases.add(new CustomWord("tinnә oyaase'nә", "What is your name?", R.raw.phrase_what_is_your_name));
+        phrases.add(new CustomWord("oyaaset...", "My name is...", R.raw.phrase_my_name_is));
+        phrases.add(new CustomWord("michәksәs?", "How are you feeling?", R.raw.phrase_how_are_you_feeling));
+        phrases.add(new CustomWord("kuchi achit", "I'm feeling good.", R.raw.phrase_im_feeling_good));
+        phrases.add(new CustomWord("әәnәs'aa?", "Are you coming?", R.raw.phrase_are_you_coming));
+        phrases.add(new CustomWord("hәә’ әәnәm", "Yes, I’m coming.", R.raw.phrase_yes_im_coming));
+        phrases.add(new CustomWord("әәnәm", "I’m coming.", R.raw.phrase_im_coming));
+        phrases.add(new CustomWord("yoowutis", "Let’s go.", R.raw.phrase_lets_go));
+        phrases.add(new CustomWord("әnni'nem", "Come here.", R.raw.phrase_come_here));
 
         CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, phrases, R.color.category_phrases);
         listView.setAdapter(customWordAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int audioResource = phrases.get(position).getAudioResourceID();
+                MediaPlayer.create(getApplicationContext(), audioResource).start();
+            }
+        });
 
     }
 }

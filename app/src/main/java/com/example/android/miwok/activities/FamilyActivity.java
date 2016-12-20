@@ -15,8 +15,11 @@
  */
 package com.example.android.miwok.activities;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.miwok.R;
@@ -34,12 +37,28 @@ public class FamilyActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.list_family);
 
-        ArrayList<CustomWord> family = new ArrayList<>();
-        family.add(new CustomWord("әpә", "Father", R.drawable.family_father));
+        final ArrayList<CustomWord> family = new ArrayList<>();
+        family.add(new CustomWord("әpә", "Father", R.drawable.family_father, R.raw.family_father));
+        family.add(new CustomWord("әṭa", "mother", R.drawable.family_mother, R.raw.family_mother));
+        family.add(new CustomWord("angsi", "son", R.drawable.family_son, R.raw.family_son));
+        family.add(new CustomWord("tune", "daughter", R.drawable.family_daughter, R.raw.family_daughter));
+        family.add(new CustomWord("taachi", "older brother", R.drawable.family_older_brother, R.raw.family_older_brother));
+        family.add(new CustomWord("chalitti", "younger brother", R.drawable.family_younger_brother, R.raw.family_younger_brother));
+        family.add(new CustomWord("teṭe", "older sister", R.drawable.family_older_sister, R.raw.family_older_sister));
+        family.add(new CustomWord("kolliti", "younger sister", R.drawable.family_younger_sister, R.raw.family_younger_sister));
+        family.add(new CustomWord("ama", "grandmother", R.drawable.family_grandmother, R.raw.family_grandmother));
+        family.add(new CustomWord("paapa", "grandfather", R.drawable.family_grandfather, R.raw.family_grandfather));
 
         CustomWordAdapter customWordAdapter = new CustomWordAdapter(this, family, R.color.category_family);
 
         listView.setAdapter(customWordAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int audioResource = family.get(position).getAudioResourceID();
+                MediaPlayer.create(getApplicationContext(), audioResource).start();
+            }
+        });
 
     }
 }

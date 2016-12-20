@@ -8,22 +8,23 @@ public class CustomWord {
     private final String mEnglishTranslation;
     private int mImageResourceID;
     private boolean mHasImageView;
-
+    private int mAudioResourceID;
     /**
      * Created by root on 12/14/16.
      *
-     * @param mMiwokTranslation is the Miwok version of the word.
+     * @param  is the Miwok version of the word.
      *
      */
-    public CustomWord(String miwokTranslation, String englishTranslation) {
+    public CustomWord(String miwokTranslation, String englishTranslation, int audioResourceID) {
         mMiwokTranslation = miwokTranslation;
         mEnglishTranslation = englishTranslation;
+        mAudioResourceID = audioResourceID;
         mHasImageView = false;
 
     }
 
-    public CustomWord(String miwokTranslation, String englishTranslation, int numberImageID) {
-        this(miwokTranslation, englishTranslation);
+    public CustomWord(String miwokTranslation, String englishTranslation, int numberImageID, int audioResourceID) {
+        this(miwokTranslation, englishTranslation, audioResourceID);
         mImageResourceID = numberImageID;
         mHasImageView = true;
     }
@@ -42,5 +43,9 @@ public class CustomWord {
 
     public boolean hasImageView() {
         return mHasImageView;
+    }
+
+    public int getAudioResourceID() {
+        return mAudioResourceID;
     }
 }
