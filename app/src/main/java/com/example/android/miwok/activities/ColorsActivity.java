@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class ColorsActivity extends AppCompatActivity {
 
     ArrayList<CustomWord> colors;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +56,26 @@ public class ColorsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               int audioResource = colors.get(position).getAudioResourceID();
-                MediaPlayer.create(getApplicationContext(), audioResource).start();
+
+                CustomWord customWord = colors.get(position);
+
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), customWord.getAudioResourceID());
+                mediaPlayer.start();
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        releaseMediaPlayer();
+                    }
+                });
             }
         });
 
+    }
 
+    private void releaseMediaPlayer() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }

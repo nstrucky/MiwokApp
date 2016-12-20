@@ -32,6 +32,8 @@ import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
 
+    MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +63,22 @@ public class NumbersActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CustomWord customWord = numbers.get(position);
                 Log.v("NumbersActivity", "Current Word: " + customWord);
-//                int audioResource = numbers.get(position).getAudioResourceID();
-                MediaPlayer.create(getApplicationContext(), customWord.getAudioResourceID()).start();
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), customWord.getAudioResourceID());
+                mediaPlayer.start();
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        releaseMediaPlayer();
+                    }
+                });
             }
         });
+    }
+
+    private void releaseMediaPlayer() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
