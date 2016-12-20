@@ -33,6 +33,12 @@ import java.util.ArrayList;
 public class NumbersActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
+    MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +67,12 @@ public class NumbersActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                releaseMediaPlayer();
                 CustomWord customWord = numbers.get(position);
                 Log.v("NumbersActivity", "Current Word: " + customWord);
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), customWord.getAudioResourceID());
                 mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        releaseMediaPlayer();
-                    }
-                });
+                mediaPlayer.setOnCompletionListener(mCompletionListener);
             }
         });
     }

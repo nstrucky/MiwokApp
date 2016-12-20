@@ -18,6 +18,7 @@ package com.example.android.miwok.activities;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -31,6 +32,12 @@ import java.util.ArrayList;
 public class FamilyActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
+    MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +64,19 @@ public class FamilyActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                releaseMediaPlayer();
                 CustomWord customWord = family.get(position);
+                Log.v("FamilyActivity", "Current Word: " + customWord);
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), customWord.getAudioResourceID());
                 mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        releaseMediaPlayer();
-                    }
-                });
+                mediaPlayer.setOnCompletionListener(mCompletionListener);
             }
         });
 
     }
+
+
+
 
     private void releaseMediaPlayer() {
         if (mediaPlayer != null) {
