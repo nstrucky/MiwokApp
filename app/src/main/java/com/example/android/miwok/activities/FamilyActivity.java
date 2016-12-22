@@ -40,6 +40,12 @@ public class FamilyActivity extends AppCompatActivity {
     };
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family);
@@ -74,9 +80,6 @@ public class FamilyActivity extends AppCompatActivity {
         });
 
     }
-
-
-
 
     private void releaseMediaPlayer() {
         if (mediaPlayer != null) {

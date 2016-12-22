@@ -15,6 +15,8 @@
  */
 package com.example.android.miwok.activities;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +34,35 @@ import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
 
-    MediaPlayer mediaPlayer;
+    protected AudioManager mAudioManager;
+    protected MediaPlayer mediaPlayer;
+
+    AudioManager.OnAudioFocusChangeListener mAudioFocusListener =
+            new AudioManager.OnAudioFocusChangeListener() {
+                @Override
+                public void onAudioFocusChange(int focusChange) {
+
+                    if (mediaPlayer != null) {
+                        switch (focusChange) {
+
+                            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                                mediaPlayer.pause();
+                                mediaPlayer.seekTo(0);
+                                break;
+
+                            case AudioManager.AUDIOFOCUS_GAIN:
+                                mediaPlayer.start();
+                                break;
+
+                            case AudioManager.AUDIOFOCUS_LOSS:
+                                releaseMediaPlayer();
+                                break;
+                        }
+                    }
+                }
+            };
+
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mp) {
@@ -44,6 +74,8 @@ public class NumbersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers);
+
+        mAudioManager = (AudioManager) NumbersActivity.this.getSystemService(Context.AUDIO_SERVICE);
 
         ListView listView = (ListView) findViewById(R.id.list);
         // Create a list of words
@@ -70,17 +102,36 @@ public class NumbersActivity extends AppCompatActivity {
                 releaseMediaPlayer();
                 CustomWord customWord = numbers.get(position);
                 Log.v("NumbersActivity", "Current Word: " + customWord);
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), customWord.getAudioResourceID());
-                mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(mCompletionListener);
+
+                int result = mAudioManager.requestAudioFocus(mAudioFocusListener,
+                                                AudioManager.STREAM_MUSIC,
+                                                AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
+
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+
+                    mediaPlayer = MediaPlayer.create(getApplicationContext(), customWord.getAudioResourceID());
+                    mediaPlayer.start();
+                    mediaPlayer.setOnCompletionListener(mCompletionListener);
+
+                } else {
+                    Toast.makeText(NumbersActivity.this, "Could not find audio.", Toast.LENGTH_SHORT);
+                }
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+
     }
 
     private void releaseMediaPlayer() {
         if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
+            mAudioManager.abandonAudioFocus(mAudioFocusListener);
         }
     }
 }
