@@ -6,7 +6,9 @@
     android:id="@+id/linearlayout_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="@dimen/image_height"
     android:orientation="horizontal">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,35 +16,46 @@
 
         <ImageView
             android:id="@+id/imageView_listItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/image_width"
+            android:layout_height="@dimen/image_height"
             tools:src="@drawable/number_one" />
 
-        <LinearLayout
-            android:id="@+id/linearlayout_textviews"
+
+        <FrameLayout
+            android:id="@+id/framelayout_list_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/imageView_listItem"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:layout_toRightOf="@id/imageView_listItem">
 
-            <TextView
-                android:id="@+id/textView_1_numbers"
+            <LinearLayout
+                android:id="@+id/linearlayout_textviews"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="22sp"
-                tools:text="one" />
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-            <TextView
-                android:id="@+id/textView_2_numbers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                tools:text="1" />
+                <TextView
+                    android:id="@+id/textView_1_numbers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp"
+                    tools:text="one" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textView_2_numbers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    tools:text="1" />
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
 
         <ImageView
             android:id="@+id/imageView"
@@ -51,8 +64,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:paddingRight="5dp"
-            app:srcCompat="@android:drawable/ic_media_play" />
+            android:layout_marginRight="16dp"
+            app:srcCompat="@drawable/ic_play_arrow" />
     </RelativeLayout>
 
 

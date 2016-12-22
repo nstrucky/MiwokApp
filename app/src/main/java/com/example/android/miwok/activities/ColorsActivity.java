@@ -18,16 +18,16 @@ package com.example.android.miwok.activities;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.miwok.R;
-import com.example.android.miwok.customsupport.CustomWordAdapter;
 import com.example.android.miwok.customsupport.CustomWord;
+import com.example.android.miwok.customsupport.CustomWordAdapter;
 
 import java.util.ArrayList;
 
@@ -99,8 +99,8 @@ public class ColorsActivity extends AppCompatActivity {
                 Log.v("ColorsActivity", "Current Word: " + customWord);
 
                 int result = mAudioManager.requestAudioFocus(mAudioFocusListener,
-                                                             AudioManager.STREAM_MUSIC,
-                                                             AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
+                        AudioManager.STREAM_MUSIC,
+                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
 
                 if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
                     mediaPlayer = MediaPlayer.create(getApplicationContext(), customWord.getAudioResourceID());

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,9 +46,9 @@ public class CustomWordAdapter extends ArrayAdapter {
                 listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
             }
 
-        LinearLayout linearLayout = (LinearLayout) listItemView.findViewById(R.id.linearlayout_textviews);
+        FrameLayout frameLayout = (FrameLayout) listItemView.findViewById(R.id.framelayout_list_item);
         int color = ContextCompat.getColor(getContext(), mColorResourceID);
-        linearLayout.setBackgroundColor(color);
+        frameLayout.setBackgroundColor(color);
 
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.imageView_listItem);
 
