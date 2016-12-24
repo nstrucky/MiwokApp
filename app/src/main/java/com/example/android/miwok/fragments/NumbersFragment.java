@@ -1,4 +1,4 @@
-package com.example.android.miwok;
+package com.example.android.miwok.fragments;
 
 
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.android.miwok.R;
 import com.example.android.miwok.customsupport.CustomWord;
 import com.example.android.miwok.customsupport.CustomWordAdapter;
 

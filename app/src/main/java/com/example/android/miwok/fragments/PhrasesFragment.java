@@ -1,4 +1,4 @@
-package com.example.android.miwok;
+package com.example.android.miwok.fragments;
 
 
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.android.miwok.R;
 import com.example.android.miwok.customsupport.CustomWord;
 import com.example.android.miwok.customsupport.CustomWordAdapter;
 
@@ -21,15 +22,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ColorsFragment extends Fragment {
+public class PhrasesFragment extends Fragment {
 
-    ArrayList<CustomWord> colors;
-    AudioManager mAudioManager;
-    MediaPlayer mediaPlayer;
 
-    public ColorsFragment() {
+    public PhrasesFragment() {
         // Required empty public constructor
     }
+    AudioManager mAudioManager;
+    MediaPlayer mediaPlayer;
 
     AudioManager.OnAudioFocusChangeListener mAudioFocusListener =
             new AudioManager.OnAudioFocusChangeListener() {
@@ -38,23 +38,21 @@ public class ColorsFragment extends Fragment {
 
                     switch (focusChange) {
 
+                        case AudioManager.AUDIOFOCUS_LOSS:
+                            releaseMediaPlayer();
+                            break;
+
                         case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
                         case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
                             mediaPlayer.pause();
-                            //pause audio
                             break;
 
                         case AudioManager.AUDIOFOCUS_GAIN:
-                            //resume playing
-                            break;
-
-                        case AudioManager.AUDIOFOCUS_LOSS:
-                            releaseMediaPlayer();
+                            mediaPlayer.start();
                             break;
                     }
                 }
             };
-
 
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
@@ -63,7 +61,6 @@ public class ColorsFragment extends Fragment {
         }
     };
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,28 +68,29 @@ public class ColorsFragment extends Fragment {
         View fragmentRootView = inflater.inflate(R.layout.fragment_word_list, container, false);
 
         mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-
         ListView listView = (ListView) fragmentRootView.findViewById(R.id.list_in_fragment);
 
-        colors = new ArrayList<>();
-        colors.add(new CustomWord("Weṭeṭṭi", "Red", R.drawable.color_red, R.raw.color_red));
-        colors.add(new CustomWord("Chokokki", "Green", R.drawable.color_green, R.raw.color_green));
-        colors.add(new CustomWord("Takaakki", "Brown", R.drawable.color_brown, R.raw.color_brown));
-        colors.add(new CustomWord("Topoppi", "Gray", R.drawable.color_gray, R.raw.color_gray));
-        colors.add(new CustomWord("kululli", "black", R.drawable.color_black, R.raw.color_black));
-        colors.add(new CustomWord("kelelli", "white", R.drawable.color_white, R.raw.color_white));
-        colors.add(new CustomWord("ṭopiisә", "dusty yellow", R.drawable.color_dusty_yellow, R.raw.color_dusty_yellow));
-        colors.add(new CustomWord("chiwiiṭә", "mustard yellow", R.drawable.color_mustard_yellow, R.raw.color_mustard_yellow));
+        final ArrayList<CustomWord> phrases = new ArrayList<>();
+        phrases.add(new CustomWord("minto wuksus", "Where are you going?", R.raw.phrase_where_are_you_going));
+        phrases.add(new CustomWord("tinnә oyaase'nә", "What is your name?", R.raw.phrase_what_is_your_name));
+        phrases.add(new CustomWord("oyaaset...", "My name is...", R.raw.phrase_my_name_is));
+        phrases.add(new CustomWord("michәksәs?", "How are you feeling?", R.raw.phrase_how_are_you_feeling));
+        phrases.add(new CustomWord("kuchi achit", "I'm feeling good.", R.raw.phrase_im_feeling_good));
+        phrases.add(new CustomWord("әәnәs'aa?", "Are you coming?", R.raw.phrase_are_you_coming));
+        phrases.add(new CustomWord("hәә’ әәnәm", "Yes, I’m coming.", R.raw.phrase_yes_im_coming));
+        phrases.add(new CustomWord("әәnәm", "I’m coming.", R.raw.phrase_im_coming));
+        phrases.add(new CustomWord("yoowutis", "Let’s go.", R.raw.phrase_lets_go));
+        phrases.add(new CustomWord("әnni'nem", "Come here.", R.raw.phrase_come_here));
 
-        CustomWordAdapter customWordAdapter = new CustomWordAdapter(getActivity(), colors, R.color.category_colors);
+        CustomWordAdapter customWordAdapter = new CustomWordAdapter(getActivity(), phrases, R.color.category_phrases);
         listView.setAdapter(customWordAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 releaseMediaPlayer();
-                CustomWord customWord = colors.get(position);
-                Log.v("ColorsActivity", "Current Word: " + customWord);
+                CustomWord customWord = phrases.get(position);
+                Log.v("PhrasesActivity", "Current Word: " + customWord);
 
                 int result = mAudioManager.requestAudioFocus(mAudioFocusListener,
                         AudioManager.STREAM_MUSIC,
@@ -123,6 +121,5 @@ public class ColorsFragment extends Fragment {
             mAudioManager.abandonAudioFocus(mAudioFocusListener);
         }
     }
-
 
 }

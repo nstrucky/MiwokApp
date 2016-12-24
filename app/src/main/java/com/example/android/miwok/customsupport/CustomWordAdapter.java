@@ -3,21 +3,15 @@ package com.example.android.miwok.customsupport;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.miwok.R;
-import com.example.android.miwok.activities.ColorsActivity;
-import com.example.android.miwok.activities.FamilyActivity;
-import com.example.android.miwok.activities.NumbersActivity;
-import com.example.android.miwok.activities.PhrasesActivity;
 
 import java.util.List;
 
